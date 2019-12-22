@@ -1,0 +1,214 @@
+<html style="font-size: 62.5px;"><head lang="en">
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>猫奴大比拼</title>
+    <script>
+        setFontSize();
+        window.onresize = function() {setFontSize();};
+        function setFontSize() {document.getElementsByTagName('html')[0].style.fontSize =parseInt(document.documentElement.clientWidth) / 7.5 + 'px';}
+    </script>
+
+    <link href="./css/reset.css" type="text/css" rel="stylesheet">
+    <!-- <script src="//g.alicdn.com/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script> -->
+</head>
+<body>
+
+    <div id="main">
+        <div id="bgDiv" class="">
+            <!-- <img class="abs" src="img/1.jpg"> -->
+            <img class="abs bg" src="img/bg.png">
+            <img class="abs start_bg" src="img/start_bg.png">
+            <img class="abs start_red" src="img/start_red.png">
+            <img class="abs start swing" src="img/start.png">
+            <img class="abs bg_copy none" src="img/copy.png">
+        </div>
+
+        <div id="answer" class="none">
+            <!-- <img class="abs" src="img/2.jpg"> -->
+            <img class="abs answer_top" src="img/answer_top.png">
+
+            <!-- 第一部分--打1-5星 -->
+            <img class="abs answer_t1" src="img/answer_t1.png">
+            <img class="abs answer_box1" src="img/answer_box1.png">
+            <div class="box1s">
+                <!-- <img class="fl star0" src="img/star0.png">
+                <img class="fl star1" src="img/star0.png">
+                <img class="fl star2" src="img/star0.png">
+                <img class="fl star3" src="img/star0.png">
+                <img class="fl star4" src="img/star0.png">
+                <img class="fl star5" src="img/star0.png">
+                <img class="fl star6" src="img/star0.png">
+                <img class="fl star7" src="img/star0.png"> -->
+            </div>
+
+            <div class="box1">
+                <!-- <div data-star="1" class="answer1">
+                    <div class="fl star"></div>
+                </div> -->
+            </div>
+
+            <!-- 第二部分--选择想要的答案 -->
+            <img class="abs answer_t2" src="img/answer_t2.png">
+            <img class="abs answer_box2" src="img/answer_box2.png">
+
+            <div id="water1" data-water="0">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type" src="img/btn_type2.png">
+            </div>
+
+            <div id="water2" data-water="1">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type" src="img/btn_type2.png">
+            </div>
+
+            <div id="water3" data-water="2">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type" src="img/btn_type2.png">
+            </div>
+
+            <div id="water4" data-water="3">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type" src="img/btn_type2.png">
+                <img class="fl btn_type mt" src="img/btn_type2.png">
+                <img class="fl btn_type mt" src="img/btn_type2.png">
+            </div>
+
+            <!-- 第三部分--其他需求 -->
+            <img class="abs message" src="img/message.png">
+            <textarea class="abs message_textarea" rows="4"></textarea>
+
+            <img class="abs start_red btn_l" src="img/start_red.png">
+            <img class="abs answer_btn swing" src="img/answer_btn.png">
+            <img class="abs start_red btn_r" src="img/start_red.png">
+        </div>
+
+        <div id="red" class="none">
+            <!-- <img class="abs" src="img/3.jpg"> -->
+            <img class="abs red_t1" src="img/red_t1.png">
+            <p class="abs red_text">恭喜中了0元红包</p>
+            <img class="abs red_t2" src="img/red_t2.png">
+            <img class="abs copy" src="img/copy.png">
+            <img class="abs red_t3" src="img/red_t3.png">
+
+            <!-- <img class="abs start_bg" src="img/start_bg.png">
+            <img class="abs start_red" src="img/start_red.png">
+            <img class="abs start" src="img/start.png"> -->
+            <!-- <canvas id="myCanvas" width="750" height="1448" style="width: 100%;" ></canvas> -->
+            
+        </div>
+        <img class="abs save none" src="img/save.png">
+
+    </div>
+
+    
+<div class="none">
+    <script type="text/javascript" src='https://w.cnzz.com/c.php?id=1278248613&l=3'></script>
+</div>
+<script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="./js/html2canvas.js"></script>
+<script type="text/javascript" src="./js/demo.js"></script>
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+	var u = navigator.userAgent, app = navigator.appVersion;
+	var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+	var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+	
+	document.body.addEventListener('focusout', () => {
+		if (isAndroid) return
+        var currentPosition,timer;
+        var speed=1;//页面滚动距离
+        timer=setInterval(function(){
+            currentPosition=document.documentElement.scrollTop || document.body.scrollTop;
+            currentPosition-=speed;
+            window.scrollTo(0,currentPosition);//页面向上滚动
+            currentPosition+=speed; //speed变量
+            window.scrollTo(0,currentPosition);//页面向下滚动
+            clearInterval(timer);
+        },1);
+    })
+</script>
+<script>
+    $.ajax({
+        url: "//api.slb.moneplus.cn/jssdk/share_list.php",
+        type: "GET",
+        dataType: 'jsonp',
+        jsonp: 'callback',
+        data: {
+            'url':window.location.protocol+'//'+ location.hostname + location.pathname + location.search
+            //  'url': location.hostname + location.pathname + location.search
+        },
+        success: function(result){
+            console.log(result)
+            wx.config({
+                debug: false,
+                appId: result.appId,
+                timestamp: result.timestamp,
+                nonceStr: result.nonceStr,
+                signature: result.signature,
+                jsApiList: [
+                    'onMenuShareTimeline',
+                    'onMenuShareAppMessage'
+                ]
+            })
+            updata();
+        },
+        error:function(res){
+            alert(res);
+        }
+    });
+    
+    // 微信分享
+    function updata(){
+        wx.ready(function (e) {
+            // wxReady();
+            wx.onMenuShareTimeline({//分享到朋友圈
+                title:'猫奴大比拼',
+                desc: '因为，正等你来发现TA......',
+                link: 'http://api.slb.moneplus.cn/ci/auth/make?url=481a3e57991df345b6509e4db04ab69dd0a847a1',
+                imgUrl: 'http://cdn.campaign.realh5.cn/2019/pets/share.png',
+                success: function () {
+                    // _hmt.push(['_trackEvent', '微信分享', '朋友圈', '成功']);
+                    console.log('onMenuShareTimeline')
+                },
+                cancel: function () {
+                    // _hmt.push(['_trackEvent', '微信分享', '朋友圈', '取消']);
+                }
+            })
+            
+            wx.onMenuShareAppMessage({//分享好友
+                title: '猫奴大比拼',
+                desc: '因为，正等你来发现TA......',
+                link: 'http://api.slb.moneplus.cn/ci/auth/make?url=481a3e57991df345b6509e4db04ab69dd0a847a1',
+                imgUrl: 'http://cdn.campaign.realh5.cn/2019/pets/share.png',
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                    // _hmt.push(['_trackEvent', '微信分享', '好友', '成功']);
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                    // _hmt.push(['_trackEvent', '微信分享', '好友', '取消']);
+                }
+            });
+        });
+    }
+    
+
+</script>
+
+</body>
+</html>
