@@ -51,5 +51,5 @@ module.exports = {
         compress: true,
         port: 8080,
         open: false//http://localhost:8080/
-      }
+    }
 }

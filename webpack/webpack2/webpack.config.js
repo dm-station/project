@@ -70,7 +70,7 @@ module.exports = {
         }),
       new OptimizeCssAssetsPlugin(),
       new ImageminPlugin({
-        disable: process.env.NODE_ENV !== 'production',//打开build情况下无效
+        disable: process.env.NODE_ENV !== 'production',
         test: /\.(jpe?g|png|gif|svg)$/i,
         plugins: [imageminMozjpeg({quality: 65}),imageminPngquant({quality: [0.65,0.8]})]
     })

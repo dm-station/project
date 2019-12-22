@@ -1,5 +1,8 @@
 
-const index = function() {
-    console.log('index')
+const index = function () {
+  // console.log('index')
 }
+
+
+
 index()
