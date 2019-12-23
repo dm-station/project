@@ -27,4 +27,3 @@ test_sockets.php
 testmysql.php
 node_modules
 dist
-webpack
