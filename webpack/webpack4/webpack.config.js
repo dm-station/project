@@ -58,7 +58,7 @@ module.exports = {
         options: {
           // 指定错误报告的格式规范
           formatter: require('eslint-friendly-formatter'),
-          fix: true,
+          // fix: true,
         }
       },
       // include: [path.resolve(__dirname, 'index.js')], 

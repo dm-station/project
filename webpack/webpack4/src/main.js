@@ -1,16 +1,13 @@
 
-// import save from './img/save.png'
+import save from './img/save.png'
 
-// import reset from './css/reset.css';
+import reset from './css/reset.css';
 
-// import other from './other.js'
+import other from './other.js'
 const main = function() {
     console.log('main',process);
     console.log('--',process.env.NODE_ENV);
     console.log('env',process.env);
-
-
-
     
 };
 main();
