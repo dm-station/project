@@ -9,6 +9,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // 压缩、去重css插件
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+// 引入webpack变量
 const webpack = require('webpack')
 // 压缩js插件
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
@@ -53,15 +54,14 @@ module.exports = {
         // 编译前检查
         enforce: 'pre',
         // 指定检查的目录
-        include: [path.resolve(__dirname, './src/index.js')], 
+        include: [path.resolve(__dirname, './src/*.js')],
         // 这里的配置项参数将会被传递到 eslint 的 CLIEngine
         options: {
           // 指定错误报告的格式规范
-          formatter: require('eslint-friendly-formatter'),
+          formatter: require('eslint-friendly-formatter')
           // fix: true,
         }
       },
-      // include: [path.resolve(__dirname, 'index.js')], 
       // 提取img并更改正确引用地址
       {
         test: /\.(png|jpg|gif)$/,
@@ -115,10 +115,11 @@ module.exports = {
         collapseWhitespace: !!isProduction
       }
     }),
+    // 分离js中的css
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
+      // 提到css目录中
+      filename: '[name].css',
       chunkFilename: '[id].css',
-      // Enable to remove warnings about conflicting order
       ignoreOrder: false
     }),
     new OptimizeCssAssetsPlugin({}),
@@ -147,13 +148,15 @@ module.exports = {
       uglifyOptions: {
         compress: {
           drop_debugger: isConsole,
-          drop_console: isConsole // 生产环境自动删除console
+          // 生产环境自动删除console
+          drop_console: isConsole
         },
         warnings: false,
         ie8: false
       },
       sourceMap: false,
-      parallel: true// 使用多进程并行运行来提高构建速度
+      // 使用多进程并行运行来提高构建速度
+      parallel: true
     })]
   },
   devServer: {

@@ -1,10 +1,14 @@
 
 const path = require('path');
+// 清除文件夹
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// html
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+// 图片压缩插件
 const imageminMozjpeg = require('imagemin-mozjpeg');
 const imageminPngquant = require('imagemin-pngquant');
 var ImageminPlugin = require('imagemin-webpack-plugin').default
+// 拷贝资源
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -31,8 +35,15 @@ module.exports = {
         //__dirname”是node.js中的一个全局变量，它指向当前执行脚本所在的目录
     },
     module: {
+        rules: [
+            {
+              test: /\.css$/,
+              use: [ 'style-loader', 'css-loader' ]
+            }
+        ]
       
     },
+    //解决Child html-webpack-plugin for "index.html"
     stats: { children: false },
     plugins: [
         //一定要放在HtmlWebpackPlugin文件前面
@@ -65,7 +76,7 @@ module.exports = {
         ]),
         new ImageminPlugin({
             //打开build情况下无效
-            // disable: process.env.NODE_ENV !== 'production',
+            disable: process.env.NODE_ENV !== 'production',
             test: /\.(jpe?g|png|gif|svg)$/i,
             //压缩png--方式1
             // pngquant: ({quality: '65-80'}),
@@ -86,5 +97,5 @@ module.exports = {
         port: 8080,
         //自动打开浏览器，访问地址http://localhost:8080/
         open: false
-      }
+    }
 }

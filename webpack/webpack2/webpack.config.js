@@ -1,20 +1,40 @@
 
 const path = require('path');
+// 清除文件夹
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// html
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+// 拷贝资源
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");//提取css到单独文件的插件
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');//压缩css插件
+// 提取css到单独文件的插件
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// 压缩、去重css插件
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+// 引入webpack变量
+const webpack = require('webpack')
+// 图片压缩插件
 const imageminMozjpeg = require('imagemin-mozjpeg');
 const imageminPngquant = require('imagemin-pngquant');
 var ImageminPlugin = require('imagemin-webpack-plugin').default
+// 压缩js插件
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+
+// 是否为生产模式
+const isProduction = process.env.NODE_ENV === 'production'
+console.log('NODE_ENV：', process.env.NODE_ENV)
 
 module.exports = {
-    // devtool: 'cheap-module-eval-source-map',
+    // 声明开发模式
+  mode: isProduction ? 'production' : 'development',
+  // 生成 source map
+  devtool: isProduction ? 'none' : 'cheap-module-eval-source-map',
+  // 解决Child html-webpack-plugin for "index.html":
     stats: { children: false },
+    // 入口
     entry: {
         main:'./src/main.js',
     },
+     // 出口
     output: {
         path: path.resolve(__dirname, 'dist/'),
         filename: '[name].js'
@@ -48,14 +68,17 @@ module.exports = {
           ]
     },
     plugins: [
+      // 一定要放在HtmlWebpackPlugin文件前面
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            filename:'index.html',
-            template:'src/index.html',
-            // minify: {
-            //     removeComments: true,        // 去掉注释
-            //     collapseWhitespace: true     // 去掉空格
-            // }
+          filename: 'index.html',
+          template: './src/index.html',
+          minify: {
+            // 去掉注释
+            removeComments: !!isProduction,
+            // 去掉空格
+            collapseWhitespace: !!isProduction
+          }
         }),
         new CopyWebpackPlugin([
             {
@@ -64,21 +87,28 @@ module.exports = {
                 ignore:['index.html','demo.js','reset.css']
             }
         ]),
-        new MiniCssExtractPlugin({//分离js中的css
-            filename:"[name].css",//提到css目录中
-            chunkFilename: "[id].css"
-        }),
+        // 分离js中的css
+    new MiniCssExtractPlugin({
+      // 提到css目录中
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+      ignoreOrder: false
+    }),
       new OptimizeCssAssetsPlugin(),
       new ImageminPlugin({
-        disable: process.env.NODE_ENV !== 'production',
+        disable: !isProduction,
         test: /\.(jpe?g|png|gif|svg)$/i,
         plugins: [imageminMozjpeg({quality: 65}),imageminPngquant({quality: [0.65,0.8]})]
     })
     ],
     devServer: {
-        contentBase: path.join(__dirname, "dist"),//在哪一个目录启动服务，需要和output.path名称一致
-        compress: false,//是否压缩
-        port: 8080,//启动的端口
-        open: false//自动打开浏览器，暂时关闭（开启会导致控制台无法输入其他命令，可以通过ctrl+d终止当前cmd命令），手动在浏览器输入http://localhost:8080/
-      }
+      //在哪一个目录启动服务，需要和output.path名称一致
+      contentBase: path.join(__dirname, "dist"),
+      //是否压缩文件
+      compress: true,
+      //启动的端口
+      port: 8080,
+      //自动打开浏览器，访问地址http://localhost:8080/
+      open: false
+  }
 }
