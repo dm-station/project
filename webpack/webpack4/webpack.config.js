@@ -1,28 +1,32 @@
 
 // process.env.NODE_ENV = 'production'
+// node用于处理文件路径的模块
 const path = require('path')
-// 清除文件夹
+// 获取全局变量webpack的引用
+const webpack = require('webpack')
+// 清空文件夹
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 // html
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-// 提取css到单独文件的插件
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-// 压缩、去重css插件
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-// 引入webpack变量
-const webpack = require('webpack')
 // 压缩js插件
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // 图片压缩插件
 const imageminMozjpeg = require('imagemin-mozjpeg')
 const imageminPngquant = require('imagemin-pngquant')
 var ImageminPlugin = require('imagemin-webpack-plugin').default
+// 提取css到单独文件的插件
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// 压缩、去重css插件
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+// 复制资源
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-// 是否为生产模式
+// 当前是否为生产环境
 const isProduction = process.env.NODE_ENV === 'production'
-// 生产模式下是否删除console.log()信息
-const isConsole = process.env.NODE_VC !== 'VC'
-console.log('NODE_ENV：', process.env.NODE_ENV, isProduction)
+// 是否要删除console信息，生产环境删除
+const isConsole = process.env.NODE_ENV === 'production'
+console.log('NODE_ENV：', process.env.NODE_ENV)
+
 module.exports = {
   // 声明开发模式
   mode: isProduction ? 'production' : 'development',
@@ -37,13 +41,12 @@ module.exports = {
   stats: { children: false },
   // 入口
   entry: {
-    main: './src/main.js',
-    index: './src/index.js'
+    main: path.resolve(__dirname, 'src/main.js')
   },
   // 出口
   output: {
     path: path.resolve(__dirname, 'dist/'),
-    filename: 'js/[name].js'
+    filename: '[name].js'
   },
 
   module: {
@@ -75,7 +78,7 @@ module.exports = {
               // 输出路径
               outputPath: 'img/',
               // 是否生成文件
-              emitFile: true
+              emitFile: false
             }
           }
         ]
@@ -96,37 +99,53 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // webpackOptions.output中的publicPath，可以根据目录结构动态调整，css文件跟html同级./,css文件在css文件夹下../，规则等同background-image
+              publicPath: '../'
+            }
+          },
           'css-loader'
         ]
       }
     ]
   },
   plugins: [
+    // 设置公众变量
+    new webpack.DefinePlugin({
+      SERVICE_URL: JSON.stringify('http://www.sina.com')
+    }),
     // 一定要放在HtmlWebpackPlugin文件前面
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './src/index.html',
       minify: {
-        // 去掉注释
-        removeComments: !!isProduction,
-        // 去掉空格
-        collapseWhitespace: !!isProduction
+        // 是否去掉注释
+        removeComments: isProduction,
+        // 是否去掉空格
+        collapseWhitespace: isProduction
       }
     }),
+    new CopyWebpackPlugin([
+      {
+        // 打包的静态资源目录地址
+        from: path.resolve(__dirname, 'src'),
+        // 打包到dist文件夹
+        to: path.resolve(__dirname, 'dist'),
+        // 忽略文件
+        ignore: ['index.html', 'main.js', 'demo.js', 'reset.css']
+      }
+    ]),
     // 分离js中的css
     new MiniCssExtractPlugin({
       // 提到css目录中
-      filename: '[name].css',
+      filename: './css/[name].css',
       chunkFilename: '[id].css',
       ignoreOrder: false
     }),
     new OptimizeCssAssetsPlugin({}),
-    // 设置公众变量
-    new webpack.DefinePlugin({
-      SERVICE_URL: JSON.stringify('http://www.sina.com')
-    }),
     new ImageminPlugin({
       // 设置true为时，将完全禁用该插件
       disable: !isProduction,

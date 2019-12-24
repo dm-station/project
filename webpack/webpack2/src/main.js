@@ -1,10 +1,17 @@
 
-import './app.css'
-import './css/reset.css'
-// import reset from './css/reset.css';
-// import reset from './css/reset.css';
+import reset from './css/reset.css'
 
 import demo from './js/demo.js'
+const main = function () {
+  console.log('NODE_ENV', process.env.NODE_ENV)
+  console.log('other', demo)
+  console.log('reset', reset)
+}
+main()
 
-var sum = () => 1 + 2;
-console.log(sum());
+// async function sayHello () {
+//   const result = await fetch(SERVICE_URL)
+//   console.log(result)
+// }
+
+// sayHello()
