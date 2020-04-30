@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>猫奴大比拼</title>
+    <script>
+        setFontSize();
+        window.onresize = function() {setFontSize();};
+        function setFontSize() {document.getElementsByTagName('html')[0].style.fontSize =parseInt(document.documentElement.clientWidth) / 7.5 + 'px';}
+    </script>
+    <link href="./css/reset.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <audio id="audio" src="media/music.mp3"  style="display:none"> </audio>
+
+    <div id="main">
+        <div id="bgDiv" class="">
+            <img class="abs" src="img/1.jpg">
+        </div>
+    </div>
+
+    <script src="./js/html2canvas.js"></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+</body>
+</html>
